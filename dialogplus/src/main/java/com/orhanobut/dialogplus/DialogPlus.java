@@ -76,6 +76,7 @@ public class DialogPlus {
     private final Animation inAnim;
 
     private final boolean enableOverlayBackground;
+    private final long autoDismiss;
 
     DialogPlus(DialogPlusBuilder builder) {
         LayoutInflater layoutInflater = LayoutInflater.from(builder.getContext());
@@ -91,6 +92,7 @@ public class DialogPlus {
         onBackPressListener = builder.getOnBackPressListener();
         isCancelable = builder.isCancelable();
         enableOverlayBackground = builder.isEnableOverlayBackground();
+        autoDismiss = builder.getAutoDismissMillis();
 
         /**
          * Avoid getting directly from the decor view because by doing that we are overlapping the black soft key on
@@ -137,6 +139,14 @@ public class DialogPlus {
             return;
         }
         onAttached(rootView);
+        if (autoDismiss > 0) {
+            rootView.getHandler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    dismiss();
+                }
+            }, autoDismiss);
+        }
     }
 
     /**
