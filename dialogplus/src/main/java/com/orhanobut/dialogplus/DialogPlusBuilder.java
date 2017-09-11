@@ -43,6 +43,7 @@ public class DialogPlusBuilder {
     private int outAnimation = INVALID;
     private boolean expanded;
     private boolean enableOverlayBackground = true;
+    private long autoDismiss = 0;
     private int defaultContentHeight;
     private int overlayBackgroundResource = R.color.dialogplus_black_overlay;
 
@@ -369,6 +370,14 @@ public class DialogPlusBuilder {
             defaultContentHeight = (displayHeight * 2) / 5;
         }
         return defaultContentHeight;
+    }
+
+    public long getAutoDismissMillis() {
+        return autoDismiss;
+    }
+
+    public void setAutoDismiss(long autoDismiss) {
+        this.autoDismiss = autoDismiss;
     }
 
     public int getOverlayBackgroundResource() {
