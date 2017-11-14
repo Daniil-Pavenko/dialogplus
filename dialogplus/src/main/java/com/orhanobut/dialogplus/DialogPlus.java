@@ -136,6 +136,7 @@ public class DialogPlus {
      */
     public void show() {
         if (isShowing()) {
+            isDismissing = false;
             return;
         }
         onAttached(rootView);
@@ -170,7 +171,6 @@ public class DialogPlus {
         outAnim.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-
             }
 
             @Override
