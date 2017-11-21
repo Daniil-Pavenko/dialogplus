@@ -175,16 +175,7 @@ public class DialogPlus {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                decorView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        decorView.removeView(rootView);
-                        isDismissing = false;
-                        if (onDismissListener != null) {
-                            onDismissListener.onDismiss(DialogPlus.this);
-                        }
-                    }
-                });
+                hideDialogView();
             }
 
             @Override
@@ -194,6 +185,33 @@ public class DialogPlus {
         });
         contentContainer.startAnimation(outAnim);
         isDismissing = true;
+    }
+
+    private void hideDialogView() {
+        decorView.post(new Runnable() {
+            @Override
+            public void run() {
+                decorView.removeView(rootView);
+                isDismissing = false;
+                if (onDismissListener != null) {
+                    onDismissListener.onDismiss(DialogPlus.this);
+                }
+            }
+        });
+    }
+
+    public void forceDismiss() {
+        isDismissing = false;
+        forceDismiss(true);
+    }
+
+    public void forceDismiss(boolean withAnimation) {
+        isDismissing = false;
+        if (withAnimation) {
+            dismiss();
+        } else {
+            hideDialogView();
+        }
     }
 
     @SuppressWarnings("unused")
