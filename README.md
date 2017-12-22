@@ -21,7 +21,7 @@ DialogPlus
 
 ### Gradle
 ```groovy
-compile 'com.github.Daniil-Pavenko:dialogplus:1.17'
+compile 'com.github.Daniil-Pavenko:dialogplus:1.28'
 ```
 
 ### Usage
