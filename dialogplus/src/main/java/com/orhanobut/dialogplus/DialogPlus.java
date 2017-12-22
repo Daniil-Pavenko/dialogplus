@@ -370,9 +370,9 @@ public class DialogPlus {
      * @param view is the dialog plus view
      */
     private void onAttached(View view) {
-        if (!hasViewInRoot(view)) {
-            decorView.addView(view);
-        }
+        if (hasViewInRoot(view)) return;
+        decorView.addView(view);
+
         contentContainer.startAnimation(inAnim);
 
         contentContainer.requestFocus();
