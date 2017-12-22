@@ -400,14 +400,11 @@ public class DialogPlus {
     }
 
     private boolean hasViewInRoot(View view) {
-        if (view instanceof ViewGroup) {
-            ViewGroup container = (ViewGroup) view;
-            int countChild = container.getChildCount();
-            for (int i = 0; i < countChild; i++) {
-                View child = container.getChildAt(i);
-                if (child == view) {
-                    return true;
-                }
+        int countChild = decorView.getChildCount();
+        for (int i = 0; i < countChild; i++) {
+            View child = decorView.getChildAt(i);
+            if (child == view) {
+                return true;
             }
         }
         return false;
