@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         globalDialog = DialogPlus.newDialog(this)
                 .setContentHolder(new ViewHolder(R.layout.big_dialog))
+                .setEnableOverlayBackground(false)
                 .setGravity(Gravity.TOP)
                 .create();
     }
@@ -32,11 +33,13 @@ public class MainActivity extends AppCompatActivity {
         DialogPlus.newDialog(this)
                 .setContentHolder(new ViewHolder(R.layout.small_dialog))
                 .setGravity(Gravity.TOP)
+                .setEnableOverlayBackground(false)
                 .create()
                 .show();
         DialogPlus.newDialog(this)
                 .setContentHolder(new ViewHolder(R.layout.big_dialog))
                 .setGravity(Gravity.TOP)
+                .setEnableOverlayBackground(false)
                 .create()
                 .show();
     }
@@ -44,6 +47,6 @@ public class MainActivity extends AppCompatActivity {
     private DialogPlus globalDialog;
 
     public void onClickGlobal(View view) {
-        if (!globalDialog.isShowing()) globalDialog.show(); else globalDialog.dismiss();
+        globalDialog.show();
     }
 }

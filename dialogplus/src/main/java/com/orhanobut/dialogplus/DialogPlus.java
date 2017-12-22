@@ -78,6 +78,8 @@ public class DialogPlus {
     private final boolean enableOverlayBackground;
     private final long autoDismiss;
 
+    private boolean isShowing = false;
+
     DialogPlus(DialogPlusBuilder builder) {
         LayoutInflater layoutInflater = LayoutInflater.from(builder.getContext());
 
@@ -156,18 +158,7 @@ public class DialogPlus {
      * @return true if it contains
      */
     public boolean isShowing() {
-        ViewGroup container = (ViewGroup) decorView.findViewById(R.id.dialogplus_outmost_container);
-        if (container == null) return false;
-        int countChild = container.getChildCount();
-        View view = null;
-        for (int i = 0; i < countChild; i++) {
-            View child = decorView.getChildAt(i);
-            if (child == holder.getInflatedView()) {
-                view = child;
-                break;
-            }
-        }
-        return view != null;
+        return isShowing;
     }
 
     /**
@@ -202,6 +193,7 @@ public class DialogPlus {
             @Override
             public void run() {
                 decorView.removeView(rootView);
+                isShowing = false;
                 isDismissing = false;
                 if (onDismissListener != null) {
                     onDismissListener.onDismiss(DialogPlus.this);
@@ -372,6 +364,7 @@ public class DialogPlus {
     private void onAttached(View view) {
         if (hasViewInRoot(view)) return;
         decorView.addView(view);
+        isShowing = true;
 
         contentContainer.startAnimation(inAnim);
 
