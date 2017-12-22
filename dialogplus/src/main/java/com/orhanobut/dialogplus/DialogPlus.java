@@ -156,7 +156,17 @@ public class DialogPlus {
      * @return true if it contains
      */
     public boolean isShowing() {
-        View view = decorView.findViewById(R.id.dialogplus_outmost_container);
+        ViewGroup container = (ViewGroup) decorView.findViewById(R.id.dialogplus_outmost_container);
+        if(container == null) return false;
+        int countChild = container.getChildCount();
+        View view = null;
+        for (int i = 0; i < countChild; i++) {
+            View child = decorView.getChildAt(i);
+            if (child == holder.getInflatedView()) {
+                view = child;
+                break;
+            }
+        }
         return view != null;
     }
 

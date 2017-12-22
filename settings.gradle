@@ -1,1 +1,1 @@
-include ':dialogplus'
+include ':dialogplus', ':sampletestapp'
