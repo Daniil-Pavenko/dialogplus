@@ -157,7 +157,7 @@ public class DialogPlus {
      */
     public boolean isShowing() {
         ViewGroup container = (ViewGroup) decorView.findViewById(R.id.dialogplus_outmost_container);
-        if(container == null) return false;
+        if (container == null) return false;
         int countChild = container.getChildCount();
         View view = null;
         for (int i = 0; i < countChild; i++) {
@@ -370,7 +370,9 @@ public class DialogPlus {
      * @param view is the dialog plus view
      */
     private void onAttached(View view) {
-        decorView.addView(view);
+        if (!hasViewInRoot(view)) {
+            decorView.addView(view);
+        }
         contentContainer.startAnimation(inAnim);
 
         contentContainer.requestFocus();
@@ -395,6 +397,20 @@ public class DialogPlus {
                 return false;
             }
         });
+    }
+
+    private boolean hasViewInRoot(View view) {
+        if (view instanceof ViewGroup) {
+            ViewGroup container = (ViewGroup) view;
+            int countChild = container.getChildCount();
+            for (int i = 0; i < countChild; i++) {
+                View child = container.getChildAt(i);
+                if (child == view) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
