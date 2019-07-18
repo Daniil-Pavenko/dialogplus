@@ -323,6 +323,7 @@ public class DialogPlusBuilder {
                 enableOverlayBackground ? ViewGroup.LayoutParams.MATCH_PARENT : ViewGroup.LayoutParams.WRAP_CONTENT
         );
         params.setMargins(outMostMargin[0], outMostMargin[1], outMostMargin[2], outMostMargin[3]);
+        params.gravity = gravity;
         return params;
     }
 
