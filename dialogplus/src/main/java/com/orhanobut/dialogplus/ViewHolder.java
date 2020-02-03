@@ -23,6 +23,7 @@ public class ViewHolder implements Holder {
     private View contentView;
     private int viewResourceId = INVALID;
     private boolean enableOverlayBackground = true;
+    private boolean enableClickOverlayBackground = true;
 
     public ViewHolder(int viewResourceId) {
         this.viewResourceId = viewResourceId;
@@ -61,6 +62,11 @@ public class ViewHolder implements Holder {
     }
 
     @Override
+    public void setClickOverlayBackgroundEnable(boolean enableClickOverlayBackground) {
+        this.enableClickOverlayBackground = enableClickOverlayBackground;
+    }
+
+    @Override
     public View getView(LayoutInflater inflater, ViewGroup parent) {
         View view = inflater.inflate(R.layout.dialog_view, parent, false);
         View outMostView = view.findViewById(R.id.dialogplus_outmost_container);
@@ -69,6 +75,9 @@ public class ViewHolder implements Holder {
         } else {
             outMostView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
+        outMostView.setClickable(enableClickOverlayBackground);
+        outMostView.setFocusable(enableClickOverlayBackground);
+
         ViewGroup contentContainer = (ViewGroup) view.findViewById(R.id.dialogplus_view_container);
         contentContainer.setOnKeyListener(new View.OnKeyListener() {
             @Override

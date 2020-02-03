@@ -14,6 +14,8 @@ public interface Holder {
 
   void setOverlayBackgroundEnable(boolean enableOverlayBackground);
 
+  void setClickOverlayBackgroundEnable(boolean enableClickOverlayBackground);
+
   View getView(LayoutInflater inflater, ViewGroup parent);
 
   void setOnKeyListener(View.OnKeyListener keyListener);
