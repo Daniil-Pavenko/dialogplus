@@ -76,6 +76,7 @@ public class DialogPlus {
     private final Animation inAnim;
 
     private final boolean enableOverlayBackground;
+    private final boolean enableClickOverlayBackground;
     private final long autoDismiss;
 
     private boolean isShowing = false;
@@ -94,6 +95,7 @@ public class DialogPlus {
         onBackPressListener = builder.getOnBackPressListener();
         isCancelable = builder.isCancelable();
         enableOverlayBackground = builder.isEnableOverlayBackground();
+        enableClickOverlayBackground = builder.isEnableClickOverlayBackground();
         autoDismiss = builder.getAutoDismissMillis();
 
         /**
@@ -107,6 +109,9 @@ public class DialogPlus {
 
         View outmostView = rootView.findViewById(R.id.dialogplus_outmost_container);
         outmostView.setBackgroundResource(builder.getOverlayBackgroundResource());
+        outmostView.setClickable(enableClickOverlayBackground);
+        outmostView.setFocusable(enableClickOverlayBackground);
+        outmostView.setFocusableInTouchMode(enableClickOverlayBackground);
 
         contentContainer = (ViewGroup) rootView.findViewById(R.id.dialogplus_content_container);
         contentContainer.setLayoutParams(builder.getContentParams());
@@ -276,7 +281,9 @@ public class DialogPlus {
             return;
         }
         View view = rootView.findViewById(R.id.dialogplus_outmost_container);
-        view.setOnTouchListener(onCancelableTouchListener);
+        if (enableClickOverlayBackground) {
+            view.setOnTouchListener(onCancelableTouchListener);
+        }
     }
 
     /**

@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 .setContentHolder(new ViewHolder(R.layout.big_dialog))
                 .setGravity(Gravity.TOP)
                 .setEnableOverlayBackground(false)
+                .setEnableClickOverlayBackground(false)
                 .create()
                 .show();
     }

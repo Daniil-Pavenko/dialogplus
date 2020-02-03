@@ -43,6 +43,7 @@ public class DialogPlusBuilder {
     private int outAnimation = INVALID;
     private boolean expanded;
     private boolean enableOverlayBackground = true;
+    private boolean enableClickOverlayBackground = true;
     private long autoDismiss = 0;
     private int defaultContentHeight;
     private int overlayBackgroundResource = R.color.dialogplus_black_overlay;
@@ -244,6 +245,11 @@ public class DialogPlusBuilder {
         return this;
     }
 
+    public DialogPlusBuilder setEnableClickOverlayBackground(boolean enableClickOverlayBackground) {
+        this.enableClickOverlayBackground = enableClickOverlayBackground;
+        return this;
+    }
+
     public DialogPlusBuilder setExpanded(boolean expanded, int defaultContentHeight) {
         this.expanded = expanded;
         this.defaultContentHeight = defaultContentHeight;
@@ -266,6 +272,7 @@ public class DialogPlusBuilder {
     public DialogPlus create() {
         getHolder().setBackgroundResource(getContentBackgroundResource());
         getHolder().setOverlayBackgroundEnable(isEnableOverlayBackground());
+        getHolder().setClickOverlayBackgroundEnable(isEnableClickOverlayBackground());
         return new DialogPlus(this);
     }
 
@@ -315,6 +322,10 @@ public class DialogPlusBuilder {
 
     public boolean isEnableOverlayBackground() {
         return enableOverlayBackground;
+    }
+
+    public boolean isEnableClickOverlayBackground() {
+        return enableClickOverlayBackground;
     }
 
     public FrameLayout.LayoutParams getOutmostLayoutParams() {
